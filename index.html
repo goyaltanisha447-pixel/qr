@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowRate — Salon Review QR Code Generator & AI Assistant</title>
+  
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Generate custom QR code flyers for your salon and boost reviews with an interactive AI review writer that helps customers write detailed feedback.">
+  <meta name="keywords" content="salon reviews, QR generator, AI review assistant, salon feedback, business flyer">
+  <meta name="author" content="GlowRate">
+
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- QRious CDN for Client-side QR Code Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header no-print">
+    <div class="header-container">
+      <div class="logo-area">
+        <span class="logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <div class="logo-text">
+          <h1>GlowRate</h1>
+          <span class="sub-logo">SALON REVIEW BOOSTER &amp; QR SUITE</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-print-flyer" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print QR Flyer</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Work Workspace -->
+  <main class="workspace no-print">
+    <div class="workspace-grid">
+      
+      <!-- Left Panel: Setup & Configuration -->
+      <section class="config-panel">
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-sliders"></i> Salon Branding &amp; Links</h2>
+            <p>Customize the review experience and generate your flyer.</p>
+          </div>
+          
+          <div class="card-body">
+            <!-- Salon Name -->
+            <div class="form-group">
+              <label for="input-salon-name">Salon Name</label>
+              <input type="text" id="input-salon-name" value="Sri Pallavi Family Salon" placeholder="e.g., Sri Pallavi Family Salon">
+            </div>
+
+            <!-- Review URL -->
+            <div class="form-group">
+              <label for="input-review-url">Google Review URL</label>
+              <div class="input-with-icon">
+                <i class="fa-brands fa-google text-muted"></i>
+                <input type="url" id="input-review-url" value="https://www.google.com/search?q=sri+pallavi+family+salon&amp;oq=sri+pallavi&amp;gs_lcrp=EgZjaHJvbWUqBggCECMYJzIGCAAQRRg5MgcIARAuGIAEMgYIAhAjGCcyEAgDEC4YrwEYxwEYgAQYjgUyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyEAgIEC4YrwEYxwEYgAQYjgUyBwgJEAAYgATSAQoyMTU1NmowajE1qAIIsAIB8QVf8OqytM8r8PEFX_DqsrTPK_A&amp;sourceid=chrome&amp;ie=UTF-8#lrd=0x3bcb97b9cf7bfeb3:0x1e54e2707cb15f8c,3,,,," placeholder="Paste your Google Maps Review link here">
+              </div>
+              <small class="form-help">If empty, we'll simulate a review landing page.</small>
+            </div>
+
+            <!-- Salon Aesthetic Vibe/Theme Color -->
+            <div class="form-group">
+              <label>Select Aesthetic Theme</label>
+              <div class="theme-picker">
+                <button class="theme-option active" data-theme="luxury-gold" style="--theme-color: #d4af37;" title="Luxury Gold & Charcoal">
+                  <span class="color-dot"></span> Gold &amp; Slate
+                </button>
+                <button class="theme-option" data-theme="velvet-rose" style="--theme-color: #d16b80;" title="Velvet Rose & Ivory">
+                  <span class="color-dot"></span> Velvet Rose
+                </button>
+                <button class="theme-option" data-theme="emerald-clean" style="--theme-color: #2e7d32;" title="Emerald & Clean White">
+                  <span class="color-dot"></span> Emerald Clean
+                </button>
+                <button class="theme-option" data-theme="midnight-neon" style="--theme-color: #8a2be2;" title="Midnight Purple & Neon">
+                  <span class="color-dot"></span> Midnight Purple
+                </button>
+              </div>
+            </div>
+
+            <!-- Services Offered -->
+            <div class="form-group">
+              <label>Services Offered (for AI Customization)</label>
+              <div class="services-grid">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-haircut" checked>
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Haircuts &amp; Styling
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-coloring" checked>
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Hair Coloring
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-nails" checked>
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Manicures &amp; Pedicures
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-facials" checked>
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Facials &amp; Skincare
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-massage">
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Massages &amp; Spa
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="svc-makeup">
+                  <span class="checkmark"><i class="fa-solid fa-check"></i></span>
+                  Makeup &amp; Lashes
+                </label>
+              </div>
+            </div>
+
+            <!-- Tone of AI Review -->
+            <div class="form-group">
+              <label for="select-default-tone">Default AI Review Tone</label>
+              <select id="select-default-tone">
+                <option value="excited" selected>Enthusiastic &amp; Happy</option>
+                <option value="professional">Professional &amp; Polite</option>
+                <option value="casual">Casual &amp; Friendly</option>
+                <option value="short">Short &amp; Concise</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabletop Flyer Settings & Code -->
+        <div class="card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-qrcode"></i> Quick QR Code &amp; Flyer</h2>
+            <p>Scan to test, or print the design on paper.</p>
+          </div>
+          <div class="card-body flyer-setup-body">
+            <div class="qr-preview-container">
+              <canvas id="qr-code-canvas"></canvas>
+              <div class="qr-scan-badge"><i class="fa-solid fa-qrcode"></i> Live QR Code</div>
+            </div>
+            
+            <div class="flyer-actions">
+              <div class="form-group" style="width: 100%; text-align: left; margin-bottom: 12px;">
+                <label for="input-qr-base" style="font-size: 0.8rem; margin-bottom: 4px;">QR Base Link (for phone testing)</label>
+                <input type="text" id="input-qr-base" style="padding: 8px 12px; font-size: 0.85rem;" placeholder="e.g. http://10.87.10.161:8000/salon-reviews/">
+                <small class="form-help">If testing on mobile, use a local web server and set your IP link above.</small>
+              </div>
+              <p class="qr-link-text" style="margin-top: 8px;">URL: <span id="lbl-qr-url">Generating...</span></p>
+              <button id="btn-download-qr" class="btn btn-secondary"><i class="fa-solid fa-download"></i> Download QR Only</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Live Mobile Device Simulator -->
+      <section class="simulator-panel">
+        <div class="simulator-header">
+          <h3><i class="fa-solid fa-mobile-screen"></i> Live Client Preview</h3>
+          <p>This is what customers see when they scan your QR code.</p>
+        </div>
+        
+        <div class="phone-wrapper">
+          <div class="phone-screen" id="simulated-mobile-page">
+            
+            <!-- Mobile Header -->
+            <header class="mobile-salon-header">
+              <div class="mobile-logo" id="sim-salon-logo">
+                <i class="fa-solid fa-scissors"></i>
+              </div>
+              <h3 id="sim-salon-name">Sri Pallavi Family Salon</h3>
+              <p class="mobile-subtitle">We value your experience. Share your thoughts!</p>
+            </header>
+
+            <!-- Mobile Body Content -->
+            <div class="mobile-content">
+              
+              <!-- Star Rating Form -->
+              <div class="rating-box card-inner">
+                <h4>Rate Your Visit</h4>
+                <div class="stars-container" id="stars-rating-container">
+                  <button class="star-btn" data-value="1" aria-label="1 star"><i class="fa-regular fa-star"></i></button>
+                  <button class="star-btn" data-value="2" aria-label="2 stars"><i class="fa-regular fa-star"></i></button>
+                  <button class="star-btn" data-value="3" aria-label="3 stars"><i class="fa-regular fa-star"></i></button>
+                  <button class="star-btn" data-value="4" aria-label="4 stars"><i class="fa-regular fa-star"></i></button>
+                  <button class="star-btn" data-value="5" aria-label="5 stars"><i class="fa-regular fa-star"></i></button>
+                </div>
+                <div class="rating-label" id="lbl-rating-text">Tap stars to rate</div>
+              </div>
+
+              <!-- Interactive Review Generator Interface -->
+              <div class="ai-box card-inner" id="sim-ai-section" style="display: none;">
+                <div class="ai-header">
+                  <div class="ai-title">
+                    <span class="ai-sparkle"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <h5>GlowRate AI Draft</h5>
+                  </div>
+                  <span class="ai-status" id="lbl-ai-status">Ready</span>
+                </div>
+
+                <!-- Client Services Selector -->
+                <div class="mobile-services-selector" style="margin-bottom: 15px; text-align: left;">
+                  <label class="section-label">What did you get done?</label>
+                  <div class="services-pills-container" id="mobile-services-container">
+                    <!-- Dynamic service pills go here -->
+                  </div>
+                </div>
+
+                <!-- Custom Experience Tags (based on rating) -->
+                <div class="tags-container-wrapper">
+                  <label class="section-label">Select highlights to add:</label>
+                  <div class="tags-scroller" id="dynamic-tags-container">
+                    <!-- Dynamic tag pills go here -->
+                  </div>
+                </div>
+
+                <!-- Tone Options Switcher -->
+                <div class="tone-toggle-wrapper">
+                  <label class="section-label">AI Tone:</label>
+                  <div class="tone-selector" id="client-tone-selector">
+                    <button class="tone-btn active" data-tone="excited">Happy</button>
+                    <button class="tone-btn" data-tone="professional">Formal</button>
+                    <button class="tone-btn" data-tone="casual">Casual</button>
+                    <button class="tone-btn" data-tone="short">Short</button>
+                  </div>
+                </div>
+
+                <!-- AI Draft Output / Editable Textarea -->
+                <div class="textarea-wrapper">
+                  <textarea id="txt-ai-draft" rows="5" placeholder="AI-generated draft will appear here..."></textarea>
+                  <div class="textarea-length" id="lbl-text-length">0 characters</div>
+                </div>
+
+                <!-- Copy & Redirect to Google Maps Review -->
+                <div class="google-cta-box" id="google-cta-box">
+                  <button id="btn-copy-and-go" class="btn btn-primary btn-full-width">
+                    <i class="fa-solid fa-copy"></i> Copy &amp; Post on Google
+                  </button>
+                  
+                  <div class="google-instructions">
+                    <h6>How it works:</h6>
+                    <ol>
+                      <li>Your draft is copied to the clipboard.</li>
+                      <li>Google Reviews will open in a new tab.</li>
+                      <li>Paste the review and submit your rating!</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Private Feedback Form (For 1-3 Stars) -->
+              <div class="feedback-box card-inner" id="sim-private-feedback-section" style="display: none;">
+                <div class="feedback-header">
+                  <h5><i class="fa-solid fa-heart-circle-exclamation"></i> Sorry to hear that</h5>
+                  <p>Please tell us how we can improve, and our manager will contact you directly.</p>
+                </div>
+                
+                <div class="form-group-compact">
+                  <label for="fb-message">Your Feedback</label>
+                  <textarea id="fb-message" rows="3" placeholder="Tell us what happened so we can fix it..."></textarea>
+                </div>
+                
+                <div class="form-group-compact">
+                  <label for="fb-name">Your Name</label>
+                  <input type="text" id="fb-name" placeholder="Name">
+                </div>
+
+                <div class="form-group-compact">
+                  <label for="fb-contact">Email or Phone</label>
+                  <input type="text" id="fb-contact" placeholder="For manager response">
+                </div>
+
+                <button id="btn-submit-feedback" class="btn btn-secondary btn-full-width">
+                  <i class="fa-solid fa-paper-plane"></i> Send Private Feedback
+                </button>
+              </div>
+
+              <!-- Success Screens -->
+              <div class="success-screen card-inner" id="success-screen-google" style="display: none;">
+                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h4>Review Draft Copied!</h4>
+                <p class="success-subtitle">Opening Google Reviews... if it didn't open, use the link below.</p>
+                
+                <div class="guide-steps-list">
+                  <div class="guide-step">
+                    <span class="step-badge">1</span>
+                    <p><strong>Stars:</strong> Select 5 stars on Google Reviews.</p>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-badge">2</span>
+                    <p><strong>Paste:</strong> Tap & hold the text area and select <strong>Paste</strong>.</p>
+                  </div>
+                  <div class="guide-step">
+                    <span class="step-badge">3</span>
+                    <p><strong>Post:</strong> Click the "Post" button to publish!</p>
+                  </div>
+                </div>
+
+                <a href="#" id="lnk-google-direct" target="_blank" class="btn btn-primary btn-full-width" style="margin-top: 10px;">Open Google Maps Reviews</a>
+                <button class="btn-text" id="btn-reset-simulator-google"><i class="fa-solid fa-rotate-left"></i> Start Over</button>
+              </div>
+
+              <div class="success-screen card-inner" id="success-screen-private" style="display: none;">
+                <div class="success-icon text-accent"><i class="fa-solid fa-paper-plane"></i></div>
+                <h4>Thank You!</h4>
+                <p>Your constructive feedback has been sent directly to the salon management. We appreciate you giving us a chance to improve.</p>
+                <button class="btn-text" id="btn-reset-simulator-private"><i class="fa-solid fa-rotate-left"></i> Start Over</button>
+              </div>
+
+              <!-- Redirection & Copy Instruction Overlay -->
+              <div class="phone-overlay" id="phone-redirect-overlay" style="display: none;">
+                <div class="overlay-card">
+                  <div class="overlay-spinner">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                  </div>
+                  <h3>Review Copied!</h3>
+                  <p class="overlay-warning-title"><i class="fa-solid fa-paste"></i> IMPORTANT STEPS</p>
+                  <p class="overlay-warning-text">
+                    Google Reviews is opening in a new tab...
+                    <br><br>
+                    <strong>When it opens:</strong>
+                    <br>
+                    1. Tap the <strong>5 stars</strong> on Google.
+                    <br>
+                    2. <strong>Paste</strong> your copied review and post!
+                  </p>
+                  <div class="overlay-countdown" id="lbl-redirect-countdown">Opening in 3s...</div>
+                  <button id="btn-force-redirect" class="btn btn-primary btn-full-width" style="margin-top: 15px;">Open Google Now</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- PRINT FLYER VIEW (Hidden on screen, styled for print only) -->
+  <div class="print-flyer-template" id="print-flyer-area">
+    <div class="flyer-container">
+      <div class="flyer-header">
+        <div class="flyer-logo-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <h1 id="flyer-salon-name">Sri Pallavi Family Salon</h1>
+        <p class="tagline">Love your look?</p>
+      </div>
+
+      <div class="flyer-body">
+        <h2>Help us shine &amp; get a surprise!</h2>
+        <p class="instruction">Scan the QR code below to review your experience. Our smart assistant will write a draft review for you in seconds!</p>
+        
+        <div class="flyer-qr-wrapper">
+          <img id="flyer-qr-image" alt="Salon Review QR Code">
+        </div>
+
+        <div class="flyer-steps">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <p>Scan QR &amp; Rate Us</p>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <p>AI Generates Review</p>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <p>Copy &amp; Post on Google</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flyer-footer">
+        <p>Thank you for supporting our local business!</p>
+        <span class="powered-by">Powered by GlowRate AI</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-info toast-icon" id="toast-icon"></i>
+    <span id="toast-msg">Notification message</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- STATE MANAGEMENT ---
   const state = {
     // Salon settings (from merchant)
-    salonName: "Vog Star Salon",
+    salonName: "Voge Star Spa & Salon for Men",
     reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJsQvSJjWXyzsRmUAO9ruy1hQ",
     theme: "luxury-gold",
     defaultTone: "excited",

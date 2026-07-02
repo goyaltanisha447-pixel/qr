@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const state = {
     // Salon settings (from merchant)
     salonName: "Sri Pallavi Family Salon",
-    reviewUrl: "https://www.google.com/search?q=sri+pallavi+family+salon&oq=sri+pallavi&gs_lcrp=EgZjaHJvbWUqBggCECMYJzIGCAAQRRg5MgcIARAuGIAEMgYIAhAjGCcyEAgDEC4YrwEYxwEYgAQYjgUyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyEAgIEC4YrwEYxwEYgAQYjgUyBwgJEAAYgATSAQoyMTU1NmowajE1qAIIsAIB8QVf8OqytM8r8PEFX_DqsrTPK_A&sourceid=chrome&ie=UTF-8#lrd=0x3bcb97b9cf7bfeb3:0x1e54e2707cb15f8c,3,,,,",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJs_57z7mXyzsRj19xfHDiVB4",
     theme: "luxury-gold",
     defaultTone: "excited",
     services: ["haircut", "coloring", "nails", "facials"],

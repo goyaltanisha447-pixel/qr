@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- STATE MANAGEMENT ---
   const state = {
     // Salon settings (from merchant)
-    salonName: "Sri Pallavi Family Salon",
-    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJs_57z7mXyzsRj19xfHDiVB4",
+    salonName: "Vog Star Salon",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJsQvSJjWXyzsRmUAO9ruy1hQ",
     theme: "luxury-gold",
     defaultTone: "excited",
     services: ["haircut", "coloring", "nails", "facials"],
